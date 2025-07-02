@@ -1,4 +1,4 @@
-﻿namespace bookstore.Implementations
+﻿namespace bookstore.Services
 {
     public class BookService
     {
