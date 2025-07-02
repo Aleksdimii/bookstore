@@ -152,4 +152,3 @@ namespace bookstore.Controllers
             return _context.Author.Any(e => e.AuthorId == id);
         }
     }
-}
