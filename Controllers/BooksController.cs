@@ -7,23 +7,28 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using bookstore.Data;
 using Microsoft.AspNetCore.Authorization;
+using AutoMapper;
 
 namespace bookstore.Controllers
 {
     public class BooksController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public BooksController(ApplicationDbContext context)
+        public BooksController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // Allow anyone to see the list of books
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Book.ToListAsync());
+            var books = await _context.Book.ToListAsync();
+            var model = _mapper.Map<List<BookViewModel>>(books);
+            return View(model);
         }
 
         // Allow anyone to see book details
@@ -37,7 +42,8 @@ namespace bookstore.Controllers
             if (book == null)
                 return NotFound();
 
-            return View(book);
+            var model = _mapper.Map<BookViewModel>(book);
+            return View(model);
         }
 
         // Only Admins can access create actions
@@ -50,15 +56,16 @@ namespace bookstore.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookId,Title,ISBN,Price")] Book book)
+        public async Task<IActionResult> Create(BookViewModel model)
         {
             if (ModelState.IsValid)
             {
+                var book = _mapper.Map<Book>(model);
                 _context.Add(book);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(book);
+            return View(model);
         }
 
         // Only Admins can access edit actions
@@ -72,34 +79,36 @@ namespace bookstore.Controllers
             if (book == null)
                 return NotFound();
 
-            return View(book);
+            var model = _mapper.Map<BookViewModel>(book);
+            return View(model);
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BookId,Title,ISBN,Price")] Book book)
+        public async Task<IActionResult> Edit(int id, BookViewModel model)
         {
-            if (id != book.BookId)
+            if (id != model.BookId)
                 return NotFound();
 
             if (ModelState.IsValid)
             {
                 try
                 {
+                    var book = _mapper.Map<Book>(model);
                     _context.Update(book);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BookExists(book.BookId))
+                    if (!BookExists(model.BookId))
                         return NotFound();
                     else
                         throw;
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(book);
+            return View(model);
         }
 
         // Only Admins can access delete actions
@@ -113,7 +122,8 @@ namespace bookstore.Controllers
             if (book == null)
                 return NotFound();
 
-            return View(book);
+            var model = _mapper.Map<BookViewModel>(book);
+            return View(model);
         }
 
         [HttpPost, ActionName("Delete")]

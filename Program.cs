@@ -1,3 +1,4 @@
+using AutoMapper;
 using bookstore.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ namespace bookstore
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
                 ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
@@ -34,8 +36,13 @@ namespace bookstore
 
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+            builder.Services.AddTransient<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, EmailSender>();
+
             var app = builder.Build();
 
+            // Seed roles and admin user on startup
             using (var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
