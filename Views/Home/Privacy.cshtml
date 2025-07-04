@@ -1,6 +1,119 @@
 ﻿@{
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<style>
+    body {
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        color: #f0f0f5;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        padding: 3rem 1rem;
+    }
+
+    .policy-container {
+        max-width: 900px;
+        margin: auto;
+        background: rgba(0, 0, 0, 0.65);
+        border-radius: 1rem;
+        padding: 3rem 2rem;
+        box-shadow:
+            0 8px 30px rgba(0, 0, 0, 0.7),
+            inset 0 0 15px rgba(255, 213, 79, 0.3);
+        line-height: 1.65;
+    }
+
+    h1 {
+        text-align: center;
+        font-weight: 900;
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        letter-spacing: 1.5px;
+        text-shadow: 2px 2px 8px #000;
+        color: #ffd54f;
+    }
+
+    h2 {
+        margin-top: 2.5rem;
+        margin-bottom: 1rem;
+        color: #ffeb99;
+        font-weight: 700;
+        border-bottom: 2px solid #ffd54f;
+        padding-bottom: 0.3rem;
+    }
+
+    p {
+        font-size: 1.1rem;
+        margin-bottom: 1.2rem;
+        color: #ddd;
+    }
+
+    ul {
+        margin-left: 1.5rem;
+        margin-bottom: 1.5rem;
+        color: #ccc;
+    }
+
+    ul li {
+        margin-bottom: 0.7rem;
+    }
+
+    a {
+        color: #ffd54f;
+        text-decoration: underline;
+    }
+
+    a:hover {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    @@media (max-width: 600px) {
+        .policy-container {
+            padding: 2rem 1rem;
+        }
+        h1 {
+            font-size: 2.3rem;
+        }
+    }
+</style>
+
+<div class="policy-container">
+    <h1>@ViewData["Title"]</h1>
+
+    <p>At Bookstore, your privacy is our top priority. This Privacy Policy explains how we collect, use, and protect your personal information when you visit our website or make a purchase.</p>
+
+    <h2>Information We Collect</h2>
+    <p>We may collect the following information:</p>
+    <ul>
+        <li><strong>Personal Identification Information:</strong> Name, email address, shipping address, phone number.</li>
+        <li><strong>Payment Information:</strong> Credit card details and billing address (processed securely via payment gateways).</li>
+        <li><strong>Usage Data:</strong> Information on how you use our website, including pages visited and time spent.</li>
+        <li><strong>Cookies and Tracking:</strong> We use cookies to enhance your experience and gather analytics.</li>
+    </ul>
+
+    <h2>How We Use Your Information</h2>
+    <p>Your information is used to:</p>
+    <ul>
+        <li>Process and fulfill your orders securely.</li>
+        <li>Communicate with you about your account, orders, and promotions.</li>
+        <li>Improve our website and personalize your shopping experience.</li>
+        <li>Comply with legal obligations and prevent fraud.</li>
+    </ul>
+
+    <h2>Data Security</h2>
+    <p>We implement robust security measures to protect your data from unauthorized access, alteration, or disclosure. Our payment processing is handled by trusted third-party providers.</p>
+
+    <h2>Your Rights</h2>
+    <p>You have the right to access, update, or delete your personal information at any time. To exercise these rights, please contact us at <a href="mailto:privacy@bookstore.com">privacy@bookstore.com</a>.</p>
+
+    <h2>Cookies Policy</h2>
+    <p>Our website uses cookies to offer you a better browsing experience. You can control cookies through your browser settings.</p>
+
+    <h2>Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated revision date.</p>
+
+    <p>If you have any questions or concerns about our privacy practices, feel free to <a href="/Home/Contact">contact us</a>.</p>
+
+    <p><em>Last updated: July 2025</em></p>
+</div>

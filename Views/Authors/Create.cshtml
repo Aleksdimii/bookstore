@@ -1,38 +1,136 @@
 ﻿@model Author
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Author";
 }
 
-<h1>Create</h1>
+<style>
+    body {
+        background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        padding: 2rem 1rem;
+        color: #e5e7eb;
+    }
 
-<h4>Author</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Biography" class="control-label"></label>
-                <input asp-for="Biography" class="form-control" />
-                <span asp-validation-for="Biography" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+    .form-container {
+        max-width: 500px;
+        margin: 2rem auto;
+        background: rgba(31, 41, 55, 0.9);
+        padding: 2.5rem 2rem;
+        border-radius: 1rem;
+        box-shadow:
+            0 8px 24px rgba(0, 0, 0, 0.7),
+            inset 0 0 10px rgba(147, 197, 253, 0.2);
+    }
 
-<div>
-    <a asp-action="Index">Back to List</a>
+    h1 {
+        text-align: center;
+        font-weight: 800;
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        color: #60a5fa; /* Sky blue */
+        text-shadow: 1px 1px 5px #1e40af;
+    }
+
+    h4 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        color: #93c5fd;
+        font-weight: 600;
+    }
+
+    label {
+        font-weight: 600;
+        color: #bfdbfe;
+    }
+
+    input[type="text"], textarea, input[type="email"] {
+        background-color: #374151;
+        border: 1px solid #60a5fa;
+        color: #e0e7ff;
+        border-radius: 0.5rem;
+        padding: 0.6rem 0.8rem;
+        width: 100%;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus, textarea:focus, input[type="email"]:focus {
+        border-color: #2563eb;
+        outline: none;
+        background-color: #1e40af;
+        color: #eff6ff;
+        box-shadow: 0 0 8px #2563eb;
+    }
+
+    .text-danger {
+        font-size: 0.9rem;
+        margin-top: 0.2rem;
+        display: block;
+        color: #f87171; /* Red-400 */
+    }
+
+    .btn-primary {
+        background-color: #2563eb;
+        border-color: #2563eb;
+        font-weight: 700;
+        padding: 0.6rem 1.5rem;
+        border-radius: 0.6rem;
+        transition: background-color 0.3s ease;
+        width: 100%;
+    }
+
+    .btn-primary:hover {
+        background-color: #1d4ed8;
+        border-color: #1d4ed8;
+    }
+
+    .back-link {
+        margin-top: 1.5rem;
+        display: block;
+        text-align: center;
+        color: #60a5fa;
+        font-weight: 600;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .back-link:hover {
+        color: #93c5fd;
+        text-decoration: underline;
+    }
+</style>
+
+<div class="form-container">
+    <h1>@ViewData["Title"]</h1>
+    <h4>Author</h4>
+
+    <form asp-action="Create" method="post" novalidate>
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Biography" class="control-label"></label>
+            <textarea asp-for="Biography" rows="4" class="form-control"></textarea>
+            <span asp-validation-for="Biography" class="text-danger"></span>
+        </div>
+
+        <div>
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+
+    <a asp-action="Index" class="back-link">← Back to List</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

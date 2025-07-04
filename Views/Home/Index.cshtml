@@ -1,8 +1,319 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    /* Background & typography */
+    body {
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        min-height: 100vh;
+        color: #f0f0f5;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+    }
+
+    /* Hero */
+    .hero-section {
+        background: rgba(0, 0, 0, 0.65);
+        padding: 5rem 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+        text-align: center;
+        margin-bottom: 3rem;
+        position: relative;
+        overflow: hidden;
+    }
+    .hero-section::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, #764ba2 0%, transparent 70%);
+        opacity: 0.3;
+        animation: pulse 8s infinite;
+        border-radius: 50%;
+        z-index: 0;
+    }
+    @@keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 0.3; }
+        50% { transform: scale(1.2); opacity: 0.5; }
+    }
+    .hero-section > * {
+        position: relative;
+        z-index: 1;
+    }
+    .hero-section h1 {
+        font-size: 3.5rem;
+        font-weight: 900;
+        letter-spacing: 1.5px;
+        text-shadow: 2px 2px 8px #000;
+    }
+    .hero-section p.lead {
+        font-size: 1.4rem;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+        color: #d1d1e0;
+        text-shadow: 1px 1px 6px #000;
+    }
+    .hero-section .btn-primary {
+        font-weight: 600;
+        padding: 0.85rem 2.5rem;
+        font-size: 1.25rem;
+        box-shadow: 0 4px 12px #512da8cc;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .hero-section .btn-primary:hover {
+        background-color: #512da8;
+        transform: scale(1.05);
+    }
+
+    /* Feature cards */
+    .feature-icon {
+        font-size: 4rem;
+        color: #ffd54f;
+        filter: drop-shadow(0 0 3px #ffe082);
+        transition: transform 0.3s ease;
+    }
+    .feature-icon:hover {
+        transform: rotate(15deg) scale(1.1);
+    }
+    .feature-card h5 {
+        margin-top: 0.8rem;
+        font-weight: 700;
+        color: #fff;
+    }
+    .feature-card p {
+        font-size: 0.95rem;
+        color: #ccc;
+        margin-top: 0.25rem;
+    }
+    .features-section {
+        max-width: 960px;
+        margin: auto;
+        margin-bottom: 4rem;
+    }
+
+    /* Featured books */
+    .featured-card {
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow:
+            0 4px 20px rgb(0 0 0 / 0.3),
+            inset 0 0 10px rgb(255 255 255 / 0.15);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background: linear-gradient(145deg, #3f2b96, #a8c0ff);
+        color: white;
+    }
+    .featured-card:hover {
+        transform: translateY(-10px) scale(1.05);
+        box-shadow:
+            0 10px 40px rgb(0 0 0 / 0.5),
+            inset 0 0 20px rgb(255 255 255 / 0.35);
+    }
+    .featured-card img {
+        height: 230px;
+        object-fit: cover;
+        border-bottom: 2px solid #fff;
+        transition: filter 0.3s ease;
+    }
+    .featured-card:hover img {
+        filter: brightness(1.1);
+    }
+    .card-body {
+        padding: 1rem 1.25rem;
+    }
+    .card-title {
+        font-weight: 800;
+        font-size: 1.2rem;
+    }
+    .card-text {
+        color: #ddd;
+        font-style: italic;
+        margin-bottom: 1rem;
+    }
+    .btn-outline-primary {
+        border-color: #ffd54f;
+        color: #ffd54f;
+        font-weight: 600;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .btn-outline-primary:hover {
+        background-color: #ffd54f;
+        color: #3f2b96;
+        text-decoration: none;
+    }
+
+    /* Categories */
+    .btn-category {
+        border-radius: 50px;
+        font-weight: 600;
+        padding: 0.5rem 1.3rem;
+        color: #ffd54f !important;
+        border: 2px solid #ffd54f !important;
+        background: transparent !important;
+        transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    }
+    .btn-category:hover {
+        background-color: #ffd54f !important;
+        color: #3f2b96 !important;
+        transform: scale(1.1);
+        text-decoration: none;
+    }
+
+    /* Newsletter */
+    .newsletter-section {
+        background: rgba(255 255 255 / 0.95);
+        border-radius: 1rem;
+        padding: 2rem;
+        max-width: 700px;
+        margin: 4rem auto;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        color: #3f2b96;
+    }
+    .newsletter-section h3 {
+        font-weight: 700;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    .newsletter-section p {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+    .newsletter-section .form-control {
+        border-radius: 50px;
+        padding: 1rem 1.5rem;
+        border: 2px solid #3f2b96;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+    }
+    .newsletter-section .form-control:focus {
+        border-color: #ffd54f;
+        box-shadow: 0 0 8px #ffd54f;
+        outline: none;
+    }
+    .newsletter-section button.btn-primary {
+        border-radius: 50px;
+        font-weight: 700;
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+        background: #ffd54f;
+        border: none;
+        color: #3f2b96;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .newsletter-section button.btn-primary:hover {
+        background: #fbc02d;
+        transform: scale(1.05);
+    }
+
+    footer {
+        background: #3f2b96;
+        color: #ffd54f;
+        padding: 1.5rem 0;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        box-shadow: inset 0 2px 8px rgba(255, 213, 79, 0.4);
+        margin-top: 5rem;
+        text-align: center;
+    }
+
+    @@media (max-width: 768px) {
+        .hero-section h1 {
+            font-size: 2.5rem;
+        }
+        .hero-section p.lead {
+            font-size: 1.1rem;
+        }
+        .feature-icon {
+            font-size: 3.5rem;
+        }
+    }
+</style>
+
+<div class="container mt-5">
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>Welcome to Bookstore</h1>
+        <p class="lead">Discover your next favorite book today.</p>
+        <a class="btn btn-primary btn-lg mt-3" href="/Books">Browse Books</a>
+    </section>
+
+    <!-- Unique Features -->
+    <section class="features-section text-center">
+        <h2 class="mb-5">Why Shop With Us?</h2>
+        <div class="row g-5 justify-content-center">
+            <div class="col-6 col-md-3 feature-card">
+                <div class="feature-icon" aria-hidden="true">📚</div>
+                <h5>Wide Selection</h5>
+                <p>Thousands of books across genres & authors.</p>
+            </div>
+            <div class="col-6 col-md-3 feature-card">
+                <div class="feature-icon" aria-hidden="true">🚚</div>
+                <h5>Fast Shipping</h5>
+                <p>Get your orders delivered quickly and safely.</p>
+            </div>
+            <div class="col-6 col-md-3 feature-card">
+                <div class="feature-icon" aria-hidden="true">💳</div>
+                <h5>Secure Payments</h5>
+                <p>Multiple payment options with data protection.</p>
+            </div>
+            <div class="col-6 col-md-3 feature-card">
+                <div class="feature-icon" aria-hidden="true">⭐</div>
+                <h5>Top Reviews</h5>
+                <p>Read honest reviews before you buy.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Books -->
+    <section class="mt-5">
+        <h2 class="mb-4 text-white text-center">Featured Books</h2>
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            <div class="col">
+                <div class="card featured-card h-100 shadow-sm">
+                    <img src="https://via.placeholder.com/150x220?text=Book+Cover" class="card-img-top" alt="Book Cover" />
+                    <div class="card-body">
+                        <h5 class="card-title">The Book Title</h5>
+                        <p class="card-text">by Author Name</p>
+                        <a href="/Books/Details/1" class="btn btn-outline-primary btn-sm">View</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more featured books here dynamically -->
+        </div>
+    </section>
+
+    <!-- Browse by Category -->
+    <section class="mt-5 text-center">
+        <h2 class="mb-4 text-white">Browse by Category</h2>
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+            @foreach (var genre in new[] { "Fiction", "Non-Fiction", "Romance", "Fantasy", "Science", "Children" })
+            {
+                <a class="btn btn-category" href="/Books?category=@genre">@genre</a>
+            }
+        </div>
+    </section>
+
+    <!-- Newsletter Subscription -->
+    <section class="newsletter-section mt-5">
+        <h3>Stay Updated</h3>
+        <p>Subscribe to our newsletter for updates on new releases and exclusive discounts.</p>
+        <form class="row g-3" method="post" action="/Newsletter/Subscribe">
+            <div class="col-md-8 col-12 mx-auto">
+                <input type="email" name="email" class="form-control" placeholder="Enter your email" required />
+            </div>
+            <div class="col-md-4 col-12 mx-auto">
+                <button class="btn btn-primary w-100" type="submit">Subscribe</button>
+            </div>
+        </form>
+    </section>
+
 </div>
+
+<footer>
+    <p>© 2025 Bookstore. All rights reserved.</p>
+</footer>

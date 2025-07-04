@@ -1,47 +1,120 @@
 ﻿@model IEnumerable<BookViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Books";
 }
 
-<h1>Index</h1>
+<style>
+    body {
+        background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+        color: #e5e7eb;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        padding: 2rem 1rem;
+    }
+
+    h1 {
+        color: #60a5fa;
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 2rem;
+        text-shadow: 1px 1px 5px #1e40af;
+    }
+
+    .btn-create {
+        background-color: #2563eb;
+        color: white;
+        font-weight: 600;
+        padding: 0.5rem 1.2rem;
+        border-radius: 0.6rem;
+        border: none;
+        display: inline-block;
+        margin-bottom: 2rem;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-create:hover {
+            background-color: #1d4ed8;
+            text-decoration: none;
+            color: white;
+        }
+
+    .book-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .book-card {
+        background-color: #111827;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
+        }
+
+    .book-title {
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #93c5fd;
+        margin-bottom: 0.5rem;
+    }
+
+    .book-isbn {
+        font-size: 0.9rem;
+        color: #9ca3af;
+        margin-bottom: 0.8rem;
+        font-family: monospace;
+    }
+
+    .book-price {
+        font-size: 1rem;
+        color: #d1d5db;
+        margin-bottom: 1rem;
+    }
+
+    .card-actions a {
+        margin-right: 0.6rem;
+        color: #60a5fa;
+        font-weight: 500;
+        text-decoration: none;
+        padding: 0.4rem 0.8rem;
+        border-radius: 0.4rem;
+        border: 1px solid transparent;
+        transition: all 0.3s ease;
+        background-color: #1e3a8a;
+    }
+
+        .card-actions a:hover {
+            background-color: #3b82f6;
+            color: #fff;
+            border-color: #60a5fa;
+        }
+</style>
+
+<h1>@ViewData["Title"]</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn-create">+ Create New Book</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ISBN)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ISBN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.BookId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BookId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.BookId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<div class="book-grid">
+    @foreach (var book in Model)
+    {
+        <div class="book-card">
+            <div class="book-title">@book.Title</div>
+            <div class="book-isbn">ISBN: @book.ISBN</div>
+            <div class="book-price">Price: $@book.Price.ToString("F2")</div>
+            <div class="card-actions">
+                <a asp-action="Edit" asp-route-id="@book.BookId">Edit</a>
+                <a asp-action="Details" asp-route-id="@book.BookId">Details</a>
+                <a asp-action="Delete" asp-route-id="@book.BookId">Delete</a>
+            </div>
+        </div>
+    }
+</div>

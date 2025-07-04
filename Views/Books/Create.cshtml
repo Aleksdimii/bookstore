@@ -1,43 +1,111 @@
 ﻿@model Book
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Book";
 }
 
-<h1>Create</h1>
+<style>
+    body {
+        background: linear-gradient(to right, #1e293b, #0f172a);
+        color: #f8fafc;
+        font-family: 'Segoe UI', sans-serif;
+        padding: 2rem 1rem;
+    }
 
-<h4>Book</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ISBN" class="control-label"></label>
-                <input asp-for="ISBN" class="form-control" />
-                <span asp-validation-for="ISBN" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+    .form-card {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #1e293b;
+        border-radius: 1rem;
+        padding: 2rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    }
 
-<div>
-    <a asp-action="Index">Back to List</a>
+    .form-card h1 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #93c5fd;
+        margin-bottom: 1rem;
+    }
+
+    .form-group label {
+        color: #facc15;
+        margin-bottom: 0.25rem;
+    }
+
+    .form-control {
+        background-color: #f8fafc;
+        color: #0f172a;
+        border: none;
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .btn-submit {
+        background-color: #3b82f6;
+        color: white;
+        font-weight: 600;
+        border: none;
+        padding: 0.5rem 1.5rem;
+        border-radius: 0.5rem;
+        transition: background-color 0.3s;
+    }
+
+    .btn-submit:hover {
+        background-color: #2563eb;
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-top: 1rem;
+        color: #cbd5e1;
+        text-decoration: none;
+    }
+
+    .text-danger {
+        color: #f87171;
+    }
+</style>
+
+<div class="form-card">
+    <h1>Create Book</h1>
+    <hr />
+
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="Title" class="control-label"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ISBN" class="control-label"></label>
+            <input asp-for="ISBN" class="form-control" />
+            <span asp-validation-for="ISBN" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Price" class="control-label"></label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn-submit" />
+        </div>
+    </form>
+
+    <a asp-action="Index" class="btn-back">← Back to List</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

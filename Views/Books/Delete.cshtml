@@ -1,39 +1,120 @@
-﻿@model Book
+﻿@model BookViewModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Delete Book";
 }
 
-<h1>Delete</h1>
+<style>
+    body {
+        background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+        color: #e5e7eb;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        padding: 2rem 1rem;
+    }
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Book</h4>
+    h1 {
+        color: #dc2626; 
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 2rem;
+        text-shadow: 1px 1px 5px #7f1d1d;
+    }
+
+    .delete-card {
+        background-color: #111827;
+        border-radius: 1rem;
+        padding: 2rem;
+        max-width: 500px;
+        margin: 0 auto 3rem auto;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
+
+    h5.card-title {
+        color: #f87171;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    dl {
+        margin-bottom: 2rem;
+    }
+
+    dt {
+        float: left;
+        width: 30%;
+        font-weight: 600;
+        color: #93c5fd;
+        padding: 0.25rem 0;
+    }
+
+    dd {
+        margin-left: 30%;
+        padding: 0.25rem 0;
+        color: #d1d5db;
+    }
+
+    form {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+    }
+
+    .btn-danger {
+        background-color: #dc2626;
+        border: none;
+        padding: 0.5rem 1.2rem;
+        border-radius: 0.6rem;
+        font-weight: 600;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-danger:hover {
+            background-color: #991b1b;
+        }
+
+    .btn-secondary {
+        background-color: #374151;
+        border: none;
+        padding: 0.5rem 1.2rem;
+        border-radius: 0.6rem;
+        font-weight: 600;
+        color: #9ca3af;
+        text-decoration: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-secondary:hover {
+            background-color: #4b5563;
+            color: white;
+            text-decoration: none;
+        }
+</style>
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="delete-card">
+    <h5 class="card-title">Are you sure you want to delete this book?</h5>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ISBN)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ISBN)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
+    <dl>
+        <dt>@Html.DisplayNameFor(model => model.Title)</dt>
+        <dd>@Html.DisplayFor(model => model.Title)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.ISBN)</dt>
+        <dd>@Html.DisplayFor(model => model.ISBN)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Price)</dt>
+        <dd>$@Html.DisplayFor(model => model.Price)</dd>
     </dl>
-    
-    <form asp-action="Delete">
+
+    <form asp-action="Delete" method="post">
         <input type="hidden" asp-for="BookId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Delete" class="btn-danger" />
+        <a asp-action="Index" class="btn-secondary">Cancel</a>
     </form>
 </div>
