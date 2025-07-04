@@ -1,34 +1,130 @@
 ﻿@model Order
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Order";
 }
 
-<h1>Edit</h1>
+<style>
+    body {
+        background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+        color: #e5e7eb;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        padding: 2rem 1rem;
+    }
 
-<h4>Order</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="OrderId" />
-            <div class="form-group">
-                <label asp-for="OrderDate" class="control-label"></label>
-                <input asp-for="OrderDate" class="form-control" />
-                <span asp-validation-for="OrderDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+    h1 {
+        color: #60a5fa;
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 2rem;
+        text-shadow: 1px 1px 5px #1e40af;
+    }
+
+    .edit-card {
+        background-color: #111827;
+        border-radius: 1rem;
+        padding: 2rem;
+        max-width: 480px;
+        margin: 0 auto 3rem auto;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        color: #e5e7eb;
+    }
+
+    h4 {
+        color: #93c5fd;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    label.control-label {
+        font-weight: 600;
+        color: #bfdbfe;
+        display: block;
+        margin-bottom: 0.4rem;
+    }
+
+    input.form-control {
+        background-color: #1f2937;
+        border: 1px solid #374151;
+        color: #e5e7eb;
+        padding: 0.6rem 0.8rem;
+        border-radius: 0.5rem;
+        width: 100%;
+    }
+
+        input.form-control:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 5px #3b82f6;
+            background-color: #111827;
+            color: #fff;
+        }
+
+    .text-danger {
+        font-size: 0.85rem;
+        margin-top: 0.25rem;
+        color: #f87171;
+    }
+
+    input.btn-primary {
+        background-color: #2563eb;
+        border: none;
+        padding: 0.6rem 1.4rem;
+        border-radius: 0.6rem;
+        font-weight: 600;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 100%;
+    }
+
+        input.btn-primary:hover {
+            background-color: #1d4ed8;
+        }
+
+    .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 1rem;
+        color: #60a5fa;
+        font-weight: 600;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+        .back-link:hover {
+            color: #3b82f6;
+        }
+</style>
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="edit-card">
+    <h4>Order</h4>
+    <hr />
+    <form asp-action="Edit">
+        <input type="hidden" asp-for="OrderId" />
+        <div class="form-group">
+            <label asp-for="OrderDate" class="control-label"></label>
+            <input asp-for="OrderDate" class="form-control" />
+            <span asp-validation-for="OrderDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<a asp-action="Index" class="back-link">← Back to List</a>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

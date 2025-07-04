@@ -1,35 +1,104 @@
 ﻿@model IEnumerable<Order>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Orders";
 }
 
-<h1>Index</h1>
+<style>
+    body {
+        background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+        color: #e5e7eb;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        padding: 2rem 1rem;
+    }
+
+    h1 {
+        color: #60a5fa;
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 2rem;
+        text-shadow: 1px 1px 5px #1e40af;
+    }
+
+    .btn-create {
+        background-color: #2563eb;
+        color: white;
+        font-weight: 600;
+        padding: 0.5rem 1.2rem;
+        border-radius: 0.6rem;
+        border: none;
+        display: inline-block;
+        margin-bottom: 2rem;
+        transition: background-color 0.3s ease;
+        text-decoration: none;
+    }
+    .btn-create:hover {
+        background-color: #1d4ed8;
+        color: white;
+        text-decoration: none;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 12px;
+        max-width: 720px;
+        margin: 0 auto;
+    }
+
+    thead tr {
+        color: #93c5fd;
+        font-weight: 700;
+        text-align: left;
+        border-bottom: 2px solid #2563eb;
+    }
+
+    tbody tr {
+        background-color: #111827;
+        box-shadow: 0 8px 15px rgba(0,0,0,0.4);
+        border-radius: 1rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    tbody tr:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.7);
+    }
+
+    tbody tr td {
+        padding: 1rem 1.5rem;
+        color: #d1d5db;
+        vertical-align: middle;
+    }
+
+    tbody tr td:last-child {
+        white-space: nowrap;
+    }
+
+    .action-links a {
+        margin-right: 0.8rem;
+        color: #60a5fa;
+        font-weight: 500;
+        text-decoration: none;
+        padding: 0.3rem 0.8rem;
+        border-radius: 0.4rem;
+        background-color: #1e3a8a;
+        transition: background-color 0.3s ease;
+    }
+    .action-links a:hover {
+        background-color: #3b82f6;
+        color: #fff;
+    }
+</style>
+
+<h1>@ViewData["Title"]</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn-create">+ Create New Order</a>
 </p>
-<table class="table">
+
+<table>
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderDate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.OrderId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.OrderId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.OrderId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            <th>@Html.DisplayNameFor(model => model.First().OrderDate)</th>
+            <th>A
