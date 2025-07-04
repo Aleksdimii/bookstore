@@ -38,7 +38,6 @@ namespace bookstore
 
             builder.Services.AddAutoMapper(typeof(MappingProfile));
 
-            builder.Services.AddTransient<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, EmailSender>();
 
             var app = builder.Build();
 
