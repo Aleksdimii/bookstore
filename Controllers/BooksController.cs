@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using bookstore.Data;
 using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
+using bookstore.Models;
 
 namespace bookstore.Controllers
 {
