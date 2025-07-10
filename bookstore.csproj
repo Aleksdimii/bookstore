@@ -10,7 +10,7 @@
     <FileVersion>1.0.0.0</FileVersion>
     <InformationalVersion>1.0.0+commitHash</InformationalVersion>
   </PropertyGroup>
-
+<!-- add-->
   <ItemGroup>
     <Compile Remove="Areas\Identity\Pages\Account\Register.cshtml.cs" />
   </ItemGroup>
