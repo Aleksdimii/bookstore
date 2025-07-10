@@ -1,10 +1,15 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using bookstore.Models;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework.Internal;
 using System;
+using Xunit;
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace UnitTestProject1
 {
-    [TestClass]
-    public class UnitTest1
+     [TestClass]
+   
+    public class UnitTest1 
     {
         [TestMethod]
         public void Book_Price_Should_Be_Positive()
@@ -37,11 +42,11 @@ namespace UnitTestProject1
         {
             var author = new Author
             {
-                FirstName = "John",
-                LastName = "Doe"
+                Name = "John",
+                Biography = "Doe"
             };
 
-            var fullName = $"{author.FirstName} {author.LastName}";
+            var fullName = $"{author.Name} {author.Biography}";
             Assert.AreEqual("John Doe", fullName);
         }
 
@@ -74,3 +79,5 @@ namespace UnitTestProject1
                     throw new ArgumentNullException(nameof(book.ISBN));
             });
         }
+    }
+}
